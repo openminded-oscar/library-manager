@@ -5,7 +5,7 @@ import lombok.Getter;
 /**
  * Created by oleh on 28.12.16.
  */
-public class Author extends Person{
+public class Author extends Person {
     public Author(String firstName, String lastName, String middleName, Integer authorId) {
         super(firstName, lastName, middleName);
         this.authorId = authorId;
@@ -31,7 +31,7 @@ public class Author extends Person{
 
     @Override
     public String toString() {
-        return "Author{" +
+        return "Author{" + super.toString() +
                 "authorId=" + authorId +
                 '}';
     }
