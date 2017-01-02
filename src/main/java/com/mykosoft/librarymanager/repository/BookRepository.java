@@ -69,7 +69,6 @@ public class BookRepository {
             String selectExistingQuery = sb.toString();
             selectExistingQuery = selectExistingQuery.substring(0, selectExistingQuery.length() - 2);
             selectExistingQuery += ")";
-            log.info(selectExistingQuery);
             List<Author> alreadyPresentAuthors = jdbcTemplate.query(selectExistingQuery, new RowMapper<Author>() {
                 @Override
                 public Author mapRow(ResultSet rs, int i) throws SQLException {
@@ -196,7 +195,6 @@ public class BookRepository {
                     books.put(bookTableId, book);
                 }
 
-                System.out.println("Author added " + author);
                 book.getAuthors().add(author);
             }
 

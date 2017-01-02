@@ -1,5 +1,5 @@
 spring.datasource:
-  url: jdbc:mysql://localhost:3306/librarymanager
+  url: jdbc:mysql://localhost:3306/librarymanager?autoReconnect=true&useSSL=false
   username: root
   password: root
   driverClassName: com.mysql.jdbc.Driver

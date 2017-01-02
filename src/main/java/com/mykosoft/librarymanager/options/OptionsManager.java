@@ -62,7 +62,9 @@ public class OptionsManager {
                     }
                 }
             } catch (IOException e) {
-                log.info(e);
+                String msg = "Program error on reading value from keyboard";
+                System.out.println(msg);
+                log.error(msg, e);
             }
         }
 
