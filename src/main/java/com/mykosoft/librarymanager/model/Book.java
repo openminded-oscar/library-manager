@@ -2,21 +2,32 @@ package com.mykosoft.librarymanager.model;
 
 
 import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 /**
  * Created by oleh on 28.12.16.
  */
-public class Book {
+public class Book implements Comparable<Book> {
     @Getter
+    @Setter
+    private Long id;
+    @Getter
+    @Setter
     private String title;
     @Getter
-    private Set<Author> authors;
+    @Setter
+    private List<Author> authors;
 
-    public Book(String title, Set<Author> authors) {
+    public Book(String title, List<Author> authors) {
         this.title = title;
         this.authors = authors;
+    }
+
+    public Book(String title) {
+        this.title = title;
     }
 
     @Override
@@ -43,5 +54,10 @@ public class Book {
                 "title='" + title + '\'' +
                 ", author=" + authors +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        return this.title.compareTo(o.getTitle());
     }
 }

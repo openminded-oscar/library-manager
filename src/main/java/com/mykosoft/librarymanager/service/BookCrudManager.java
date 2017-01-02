@@ -6,7 +6,6 @@ import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -18,7 +17,23 @@ public class BookCrudManager {
     @Getter
     private BookRepository bookRepository;
 
-    public Set<Book> findAllBooks(){
+    public Set<Book> findAllBooks() {
         return bookRepository.findAllBooks();
+    }
+
+    public Set<Book> findBookByExactTitle(String title) {
+        return bookRepository.findBooksByTitle(title);
+    }
+
+    public void addBook(Book book) {
+        bookRepository.addBook(book);
+    }
+
+    public void updateBookTitle(Book book){
+        bookRepository.updateBookTitle(book);
+    }
+
+    public void deleteBookTitle(Book book){
+        bookRepository.deleteBook(book);
     }
 }

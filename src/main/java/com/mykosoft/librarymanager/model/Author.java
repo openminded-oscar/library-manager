@@ -1,18 +1,29 @@
 package com.mykosoft.librarymanager.model;
 
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by oleh on 28.12.16.
  */
 public class Author extends Person {
+    @Getter
+    @Setter
+    private Long id;
+
+    @Getter
+    @Setter
+    private Integer authorId;
+
+    public Author(Integer authorId) {
+        super();
+        this.authorId = authorId;
+    }
+
     public Author(String firstName, String lastName, String middleName, Integer authorId) {
         super(firstName, lastName, middleName);
         this.authorId = authorId;
     }
-
-    @Getter
-    private Integer authorId;
 
     @Override
     public boolean equals(Object o) {
