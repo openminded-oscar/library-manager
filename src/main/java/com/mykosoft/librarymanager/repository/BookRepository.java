@@ -30,10 +30,6 @@ public class BookRepository {
     @Autowired
     private DataSource ds;
 
-//    remove {book_name}
-//    edit book {book_name}
-//    user enters new name: {book_name}
-
     @Transactional
     public void deleteBook(Book book) {
         String removalQuery = "DELETE FROM tbl_book where id = ?";
@@ -41,9 +37,9 @@ public class BookRepository {
     }
 
     @Transactional
-    public void updateBookTitle(Book book) {
+    public void updateBookTitle(Book book, String newTitle) {
         String updateTitleQuery = "UPDATE tbl_book SET title = ? where id = ?";
-        jdbcTemplate.update(updateTitleQuery, book.getTitle(), book.getId());
+        jdbcTemplate.update(updateTitleQuery, newTitle, book.getId());
     }
 
     @Transactional
@@ -61,7 +57,6 @@ public class BookRepository {
             // insert not existed in DB related authors
             StringBuilder sb = new StringBuilder("SELECT ");
             sb.append("id as a_id, ");
-            ;
             sb.append("first_name as a_first_name, ");
             sb.append("last_name as a_last_name, ");
             sb.append("middle_name as a_middle_name, ");
@@ -136,11 +131,11 @@ public class BookRepository {
     }
 
 
-    public Set<Book> findAllBooks(){
+    public Set<Book> findAllBooks() {
         return findBooks(null);
     }
 
-    public Set<Book> findBooksByTitle(String title){
+    public Set<Book> findBooksByTitle(String title) {
         return findBooks(title);
     }
 
@@ -158,15 +153,15 @@ public class BookRepository {
         sb.append("a.middle_name as a_middle_name ");
         sb.append("FROM tbl_book b INNER JOIN tbl_book_author INNER JOIN tbl_author a ");
         if (title != null) {
-            sb.append("WHERE b_title = ?");
+            sb.append("WHERE b.title LIKE ?");
         }
-        sb.append("ORDER BY b_title");
+        sb.append("ORDER BY b.title");
 
         String query = sb.toString();
         if (title != null) {
-            Object[] parameters = {title};
+            Object[] parameters = {"%" + title + "%"};
             books = jdbcTemplate.query(query, parameters, new BookSetMapper());
-        }else{
+        } else {
             books = jdbcTemplate.query(query, new BookSetMapper());
         }
 
@@ -193,6 +188,7 @@ public class BookRepository {
 
                 if (books.get(bookTableId) == null) {
                     book = new Book(rs.getString("b_title"), new ArrayList<>());
+                    book.setId(bookTableId.longValue());
                     books.put(bookTableId, book);
                 }
 

@@ -21,7 +21,8 @@ public class BookCrudManager {
         return bookRepository.findAllBooks();
     }
 
-    public Set<Book> findBookByExactTitle(String title) {
+    // returns books by title like matching
+    public Set<Book> findBookByTitle(String title) {
         return bookRepository.findBooksByTitle(title);
     }
 
@@ -29,11 +30,11 @@ public class BookCrudManager {
         bookRepository.addBook(book);
     }
 
-    public void updateBookTitle(Book book){
-        bookRepository.updateBookTitle(book);
+    public void updateBookTitle(Book book, String newTitle) {
+        bookRepository.updateBookTitle(book, newTitle);
     }
 
-    public void deleteBookTitle(Book book){
+    public void deleteBook(Book book) {
         bookRepository.deleteBook(book);
     }
 }

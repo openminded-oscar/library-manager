@@ -1,10 +1,7 @@
 package com.mykosoft.librarymanager.options;
 
 import com.mykosoft.librarymanager.ConsoleReader;
-import com.mykosoft.librarymanager.options.processors.AddBookProcessor;
-import com.mykosoft.librarymanager.options.processors.ExitProcessor;
-import com.mykosoft.librarymanager.options.processors.OptionProcessor;
-import com.mykosoft.librarymanager.options.processors.ShowAllBooksProcessor;
+import com.mykosoft.librarymanager.options.processors.*;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,6 +25,10 @@ public class OptionsManager {
     @Autowired
     private AddBookProcessor addBookProcessor;
     @Autowired
+    private RemoveBookProcessor removeBookProcessor;
+    @Autowired
+    private EditBookProcessor editBookProcessor;
+    @Autowired
     private ExitProcessor exitProcessor;
 
 
@@ -36,7 +37,8 @@ public class OptionsManager {
         optionsProcessors = new EnumMap<>(Options.class);
         optionsProcessors.put(Options.ALL, showAllBooksProcessor);
         optionsProcessors.put(Options.ADD, addBookProcessor);
-
+        optionsProcessors.put(Options.REMOVE, removeBookProcessor);
+        optionsProcessors.put(Options.EDIT, editBookProcessor);
         optionsProcessors.put(Options.EXIT, exitProcessor);
 
         System.out.println(optionsProcessors);
@@ -54,8 +56,6 @@ public class OptionsManager {
                 Options optionSelected = Options.valueOf(userInput);
                 if (optionSelected != null) {
                     OptionProcessor optionProcessor = optionsProcessors.get(optionSelected);
-                    System.out.println(optionsProcessors);
-                    System.out.println(optionProcessor == null);
                     optionProcessor.executeCommand();
                     if (optionProcessor.isTerminating()) {
                         break;

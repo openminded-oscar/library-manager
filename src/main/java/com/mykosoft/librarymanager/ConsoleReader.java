@@ -34,7 +34,7 @@ public class ConsoleReader {
         return Integer.valueOf(input);
     }
 
-    private Integer readInteger(String prompt) throws IOException {
+    public Integer readInteger(String prompt) throws IOException {
         System.out.println(prompt);
 
         return readInteger();
