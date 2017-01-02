@@ -1,12 +1,9 @@
-package com.mykosoft.librarymanager.formatters;
+package com.mykosoft.librarymanager.input;
 
 import com.mykosoft.librarymanager.model.Author;
 import com.mykosoft.librarymanager.model.Book;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by oleh on 02.01.17.

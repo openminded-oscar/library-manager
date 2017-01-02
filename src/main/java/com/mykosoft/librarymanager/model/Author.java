@@ -9,7 +9,7 @@ import lombok.Setter;
 public class Author extends Person {
     @Getter
     @Setter
-    private Long id;
+    private Integer id;
 
     @Getter
     @Setter

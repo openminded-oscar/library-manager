@@ -13,7 +13,7 @@ import java.util.Set;
 public class Book implements Comparable<Book> {
     @Getter
     @Setter
-    private Long id;
+    private Integer id;
     @Getter
     @Setter
     private String title;
@@ -51,9 +51,9 @@ public class Book implements Comparable<Book> {
     @Override
     public String toString() {
         return "Book{" +
-                "title='" + title + '\'' +
-                ", author=" + authors +
-                '}';
+                "\ntitle='" + title + '\'' +
+                "\nauthors=" + authors +
+                "\n}";
     }
 
     @Override

@@ -1,7 +1,6 @@
-package com.mykosoft.librarymanager.formatters;
+package com.mykosoft.librarymanager.input;
 
 import com.mykosoft.librarymanager.model.Author;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by oleh on 02.01.17.

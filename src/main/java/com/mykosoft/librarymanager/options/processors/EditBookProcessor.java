@@ -1,7 +1,8 @@
 package com.mykosoft.librarymanager.options.processors;
 
-import com.mykosoft.librarymanager.ConsoleReader;
+import com.mykosoft.librarymanager.input.ConsoleReader;
 import com.mykosoft.librarymanager.model.Book;
+import com.mykosoft.librarymanager.options.common.BookSelectingStrategy;
 import com.mykosoft.librarymanager.service.BookCrudManager;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,9 @@ import java.util.Set;
 public class EditBookProcessor implements OptionProcessor {
     @Autowired
     private BookCrudManager bookCrudManager;
+    @Autowired
+    private BookSelectingStrategy bookSelector;
+
     private static ConsoleReader reader = new ConsoleReader();
 
 
@@ -31,18 +35,7 @@ public class EditBookProcessor implements OptionProcessor {
 
             Set<Book> booksByTitle = bookCrudManager.findBookByTitle(bookTitle);
             if (booksByTitle.size() >= 1) {
-                if (booksByTitle.size() > 1) {
-                    System.out.println("Multiple books exist with that title!");
-                    for(Book bookByTitle: booksByTitle){
-                        System.out.println(bookByTitle);
-                    }
-                    System.out.println("Choose the book by it's id!");
-                    Integer selectedId = reader.readInteger("Input book id to select it:");
-                    book = booksByTitle.stream().filter(b -> b.getId().equals(selectedId)).findAny().get();
-                } else {
-                    book = booksByTitle.iterator().next();
-                    System.out.println(book);
-                }
+                book = bookSelector.selectBookFromCollection(booksByTitle);
                 String newTitle = reader.readLine("Input book new title:");
                 bookCrudManager.updateBookTitle(book, newTitle);
             } else {

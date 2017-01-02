@@ -1,6 +1,6 @@
 package com.mykosoft.librarymanager.options.processors;
 
-import com.mykosoft.librarymanager.ConsoleReader;
+import com.mykosoft.librarymanager.input.ConsoleReader;
 import com.mykosoft.librarymanager.model.Book;
 import com.mykosoft.librarymanager.service.BookCrudManager;
 import lombok.extern.log4j.Log4j;

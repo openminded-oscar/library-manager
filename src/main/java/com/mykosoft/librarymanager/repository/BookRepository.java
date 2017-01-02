@@ -49,7 +49,7 @@ public class BookRepository {
         params.put("title", book.getTitle());
         SimpleJdbcInsert insert = new SimpleJdbcInsert(ds).withTableName("tbl_book").usingColumns("title")
                 .usingGeneratedKeyColumns("id");
-        Long generatedBookId = (Long) insert.executeAndReturnKey(params);
+        Integer generatedBookId = (Integer) insert.executeAndReturnKey(params);
         book.setId(generatedBookId);
 
         List<Author> bookAuthors = book.getAuthors();
@@ -151,13 +151,17 @@ public class BookRepository {
         sb.append("a.first_name as a_first_name, ");
         sb.append("a.last_name as a_last_name, ");
         sb.append("a.middle_name as a_middle_name ");
-        sb.append("FROM tbl_book b INNER JOIN tbl_book_author INNER JOIN tbl_author a ");
+        sb.append("FROM tbl_book b INNER JOIN tbl_book_author ba ");
+        sb.append("ON b.id=ba.book_id ");
+        sb.append("INNER JOIN tbl_author a ");
+        sb.append("ON a.id=ba.author_id ");
         if (title != null) {
             sb.append("WHERE b.title LIKE ?");
         }
         sb.append("ORDER BY b.title");
 
         String query = sb.toString();
+        System.out.println(query);
         if (title != null) {
             Object[] parameters = {"%" + title + "%"};
             books = jdbcTemplate.query(query, parameters, new BookSetMapper());
@@ -188,10 +192,11 @@ public class BookRepository {
 
                 if (books.get(bookTableId) == null) {
                     book = new Book(rs.getString("b_title"), new ArrayList<>());
-                    book.setId(bookTableId.longValue());
+                    book.setId(bookTableId);
                     books.put(bookTableId, book);
                 }
 
+                System.out.println("Author added " + author);
                 book.getAuthors().add(author);
             }
 
@@ -206,7 +211,7 @@ public class BookRepository {
                 rs.getString("a_last_name"),
                 rs.getString("a_middle_name"),
                 rs.getInt("a_author_id"));
-        author.setId(rs.getLong("a_id"));
+        author.setId(rs.getInt("a_id"));
 
         return author;
     }

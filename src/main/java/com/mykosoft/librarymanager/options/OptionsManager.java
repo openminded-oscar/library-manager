@@ -1,6 +1,6 @@
 package com.mykosoft.librarymanager.options;
 
-import com.mykosoft.librarymanager.ConsoleReader;
+import com.mykosoft.librarymanager.input.ConsoleReader;
 import com.mykosoft.librarymanager.options.processors.*;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.mykosoft.librarymanager.formatters;
+package com.mykosoft.librarymanager.input;
 
 /**
  * Created by oleh on 02.01.17.
