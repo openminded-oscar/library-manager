@@ -27,9 +27,8 @@ public class BookSelectingById implements BookSelectingStrategy {
             Integer selectedId = reader.readInteger("Input book id to select it:");
             book = booksByTitle.stream().filter(b -> b.getId().equals(selectedId)).findAny().get();
         } else {
-            reader.readLine("One book found");
-            System.out.println(book);
             book = booksByTitle.iterator().next();
+            reader.readLine("One book found\n" + book.toString());
         }
 
         return book;

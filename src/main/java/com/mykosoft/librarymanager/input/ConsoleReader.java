@@ -1,5 +1,6 @@
 package com.mykosoft.librarymanager.input;
 
+import com.mykosoft.librarymanager.input.formatters.BookFormatter;
 import com.mykosoft.librarymanager.model.Author;
 import com.mykosoft.librarymanager.model.Book;
 

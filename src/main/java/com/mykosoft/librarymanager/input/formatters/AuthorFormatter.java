@@ -1,4 +1,4 @@
-package com.mykosoft.librarymanager.input;
+package com.mykosoft.librarymanager.input.formatters;
 
 import com.mykosoft.librarymanager.model.Author;
 

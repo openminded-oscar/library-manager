@@ -65,6 +65,9 @@ public class OptionsManager {
                 String msg = "Program error on reading value from keyboard";
                 System.out.println(msg);
                 log.error(msg, e);
+            } catch (IllegalArgumentException e){
+                String msg = "Option not exists! Try again!";
+                System.out.println(msg);
             }
         }
 

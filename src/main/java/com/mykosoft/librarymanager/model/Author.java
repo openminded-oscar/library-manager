@@ -2,6 +2,7 @@ package com.mykosoft.librarymanager.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.validation.ValidationUtils;
 
 /**
  * Created by oleh on 28.12.16.
@@ -22,6 +23,7 @@ public class Author extends Person {
 
     public Author(String firstName, String lastName, String middleName, Integer authorId) {
         super(firstName, lastName, middleName);
+        
         this.authorId = authorId;
     }
 
